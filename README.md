@@ -9,3 +9,5 @@ All classes and their functionalities are listed below:
   Simple class allowing reading user input from keyboard.
 - ImagePreprocessor:
   Prepares necessary variables and assets for robot to work.
+- BotMain:
+  Contains main robot loop.
