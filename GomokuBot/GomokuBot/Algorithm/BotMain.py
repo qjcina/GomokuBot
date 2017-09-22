@@ -7,8 +7,10 @@ class BotMain(object):
         self.isReadyToExit = False
 
     def process(self):
-        oMapGenerator = Settings["mapGenerator"].value
-        oMapGenerator.createMap(self.oBitmap)
+        oMapGenerator = Settings["mapGenerator"].value       
+        if(Settings["debugMode"]):
+            oMapGenerator.setDebug()
+        oMapGenerator.createMap(self.oBitmap, self.oCoordinates)
         while(True):
 
             if(self.isReadyToExit):

@@ -3,5 +3,6 @@ from Algorithm.MapGenerators.LineMapGenerator import LineMapGenerator
 class mapGenerator(Enum):
     DEFAULT = LineMapGenerator()
 Settings= {
-    "mapGenerator" : mapGenerator.DEFAULT
+    "mapGenerator" : mapGenerator.DEFAULT,
+    "debugMode" : True
     }
