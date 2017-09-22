@@ -22,6 +22,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="GomokuBot.py" />
+    <Compile Include="ImagePreprocessor.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="InputReader.py">
       <SubType>Code</SubType>
     </Compile>

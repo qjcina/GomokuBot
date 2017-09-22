@@ -5,11 +5,18 @@ import numpy as numpy
 import win32gui
 from multiprocessing import Process
 from InputReader import InputReader
+"""
+WindowGrabber class catches user selected rectangle on the screen
+and makes region screenshot. 
+"""
 class WindowGrabber(object):
     figure = None
     def __grabImage(self):
         self.image = ImageGrab.grab(bbox=self.coordinates)
-
+    """
+    checkValid method lets user decide if image is valid.
+    Returns image and its coordinates.
+    """
     def checkValid(self):
         self.drawImage()
         oInput = InputReader()
@@ -23,7 +30,7 @@ class WindowGrabber(object):
                 self.coordinates = self.markCoords()
                 self.__grabImage()
                 self.drawImage()
-        return self.image
+        return (self.image, self.coordinates)
 
     def drawImage(self):
         self.figure = plot.figure()
