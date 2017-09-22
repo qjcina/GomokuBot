@@ -2,7 +2,7 @@ import pyscreenshot as ImageGrab
 import matplotlib.pyplot as plot
 import matplotlib.image as img
 import numpy as numpy
-import win32gui
+from win32 import win32gui
 from multiprocessing import Process
 from InputReader import InputReader
 """
@@ -30,12 +30,13 @@ class WindowGrabber(object):
                 self.coordinates = self.markCoords()
                 self.__grabImage()
                 self.drawImage()
+        plot.close(self.figure)
         return (self.image, self.coordinates)
 
     def drawImage(self):
         self.figure = plot.figure()
-        image = self.image.convert('RGBA')
-        plot.imshow(image)
+        image = self.image.convert('L')
+        plot.imshow(image, cmap='gray')
         plot.show(block=False)
 
     def markCoords(self):
