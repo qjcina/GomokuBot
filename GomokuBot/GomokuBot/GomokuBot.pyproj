@@ -11,7 +11,7 @@
     <OutputPath>.</OutputPath>
     <Name>GomokuBot</Name>
     <RootNamespace>GomokuBot</RootNamespace>
-    <InterpreterId>Global|PythonCore|3.6-32</InterpreterId>
+    <InterpreterId>Global|PythonCore|3.6</InterpreterId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,22 +22,45 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="BotMain.py">
+    <Compile Include="Algorithm\BotMain.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Algorithm\LineDetection\LineMapGenerator.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Algorithm\__init__.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="GomokuBot.py" />
-    <Compile Include="ImagePreprocessor.py">
+    <Compile Include="ImageProcessing\ImagePreprocessor.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="InputReader.py">
+    <Compile Include="ImageProcessing\__init__.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="WindowGrabber.py">
+    <Compile Include="Input\InputReader.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Input\WindowGrabber.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Input\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Settings.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <InterpreterReference Include="Global|PythonCore|3.6-32" />
+    <Folder Include="Algorithm\LineDetection\" />
+    <Folder Include="LineDetection\" />
+    <Folder Include="ImageProcessing\" />
+    <Folder Include="Algorithm\" />
+    <Folder Include="Input\" />
+    <Folder Include="Input\" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterpreterReference Include="Global|PythonCore|3.6" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

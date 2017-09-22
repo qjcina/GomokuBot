@@ -1,8 +1,10 @@
 import cv2
+from .Settings import Settings
 class BotMain(object):
     def __init__(self, oBitmap, oCoordinates):
         self.oBitmap = oBitmap
         self.oCoordinates = oCoordinates
+        self.isReadyToExit = False
         #Algorithm for detecting line intersection
         #https://en.wikipedia.org/wiki/Line%E2%80%93line_intersection#Mathematics
     def createMap(self, oBitmap):
@@ -18,6 +20,7 @@ class BotMain(object):
         return (x,y)
 
     def process(self):
+        oMapGenerator = Settings["mapGenerator"]
         while(True):
 
             if(self.isReadyToExit):

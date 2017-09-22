@@ -4,7 +4,7 @@ import matplotlib.image as img
 import numpy as numpy
 from win32 import win32gui
 from multiprocessing import Process
-from InputReader import InputReader
+from Input.InputReader import InputReader
 """
 WindowGrabber class catches user selected rectangle on the screen
 and makes region screenshot. 

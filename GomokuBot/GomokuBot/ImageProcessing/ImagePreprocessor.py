@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plot
 import copy
-from InputReader import InputReader
+from Input.InputReader import InputReader
 class ImagePreprocessor(object):
     def __init__(self, image, coordinates):
         if(type(coordinates) is not tuple):
