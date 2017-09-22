@@ -11,3 +11,8 @@ All classes and their functionalities are listed below:
   Prepares necessary variables and assets for robot to work.
 - BotMain:
   Contains main robot loop.
+# Algorithms
+- **LineMapGenerator**:
+Generates map based on vertical and horizontal line detection.
+![LineMapGenerator](https://i.imgur.com/8VEE40N.png)
+Average lightness is lower when vertical line appears. This graph also lets you easily separate menu.
