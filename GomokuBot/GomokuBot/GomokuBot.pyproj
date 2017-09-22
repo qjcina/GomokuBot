@@ -25,7 +25,10 @@
     <Compile Include="Algorithm\BotMain.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Algorithm\LineDetection\LineMapGenerator.py">
+    <Compile Include="Algorithm\MapGenerators\LineMapGenerator.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Algorithm\MapGenerators\__init__.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Algorithm\__init__.py">
@@ -47,17 +50,21 @@
     <Compile Include="Input\__init__.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Settings.py">
+    <Compile Include="Resources\Settings.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Resources\__init__.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Algorithm\LineDetection\" />
+    <Folder Include="Algorithm\MapGenerators\" />
     <Folder Include="LineDetection\" />
     <Folder Include="ImageProcessing\" />
     <Folder Include="Algorithm\" />
     <Folder Include="Input\" />
     <Folder Include="Input\" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
     <InterpreterReference Include="Global|PythonCore|3.6" />
