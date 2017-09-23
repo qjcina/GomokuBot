@@ -10,7 +10,7 @@ class BotMain(object):
         oMapGenerator = Settings["mapGenerator"].value       
         if(Settings["debugMode"]):
             oMapGenerator.setDebug()
-        oMapGenerator.createMap(self.oBitmap, self.oCoordinates)
+        self.oMap = oMapGenerator.createMap(self.oBitmap, self.oCoordinates)
         while(True):
 
             if(self.isReadyToExit):

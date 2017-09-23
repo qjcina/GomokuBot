@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plot
 import matplotlib.lines as mlines
+from Algorithm.MapGenerators.Map import Map
 class LineMapGenerator(object):
     debug = False
     def __init__(self):
@@ -48,12 +49,22 @@ class LineMapGenerator(object):
         del iHorizontalAverage[iLastVerticalLine+10:]
         self.calculateAverage(width, iHorizontalAverage)
         oHorizontalLines = self.findLines(iHorizontalAverage)
-
+        #Adds missing middle line
+        oHorizontalLines.insert(7,sum(oHorizontalLines[6:8])/2)
+        #Creates list of points.
+        oPointsList = []
+        for y in range(0,len(oVerticalLines)):
+            for x in range(0,len(oHorizontalLines)):
+                oPointsList.append([oHorizontalLines[x], oVerticalLines[y]])
+        
         if(self.debug == True):
-            self.__showDebug(oBitmap, oVerticalLines, oHorizontalLines, width, height)
+            self.__showDebug(oBitmap, oVerticalLines, oHorizontalLines, width, height, oPointsList)
+        
+        return Map(oPointsList,(len(oHorizontalLines),len(oVerticalLines)), oCoordinates, True)
+    #def getControls(self, oBitmap, oCoordinates):
 
-    def __showDebug(self, oBitmap, oVerticalLines, oHorizontalLines, width, height):
-        plot.imshow(oBitmap)
+    def __showDebug(self, oBitmap, oVerticalLines, oHorizontalLines, width, height, oPoints):
+        plot.imshow(oBitmap, cmap='gray')
         for x in range(0,len(oVerticalLines)):
             line = mlines.Line2D([oVerticalLines[x], oVerticalLines[x]],[0,height])
             plotGCA = plot.gca()
@@ -62,6 +73,9 @@ class LineMapGenerator(object):
             line = mlines.Line2D([0,width],[oHorizontalLines[x], oHorizontalLines[x]])
             plotGCA = plot.gca()
             plotGCA.add_line(line)
+        x_list = [x for [x, y] in oPoints]
+        y_list = [y for [x, y] in oPoints]
+        plot.scatter(x_list, y_list)
         plot.show()
     #Algorithm for detecting line intersection
     #https://en.wikipedia.org/wiki/Line%E2%80%93line_intersection#Mathematics

@@ -11,7 +11,7 @@ class ImagePreprocessor(object):
         height = y2-y1-1
         self.oBitmap = [[0 for x in range(width+1)] for y in range(height+1)]
         print("Loading image:")
-        iSingleStep = width*height/100
+        iSingleStep = round(width*height/100)
         iStep=0
         for x in range(0, width):
             for y in range(0, height):

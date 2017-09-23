@@ -28,6 +28,12 @@
     <Compile Include="Algorithm\MapGenerators\LineMapGenerator.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Algorithm\MapGenerators\Map.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Algorithm\MapGenerators\MapElement.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Algorithm\MapGenerators\__init__.py">
       <SubType>Code</SubType>
     </Compile>
