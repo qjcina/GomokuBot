@@ -16,3 +16,6 @@ All classes and their functionalities are listed below:
 Generates map based on vertical and horizontal line detection.
 ![LineMapGenerator](https://i.imgur.com/8VEE40N.png)
 Average lightness is lower when vertical line appears. This graph also lets you easily separate menu.
+# Other bots:
+- Petriczi (C#):
+https://github.com/petriczi/boty_jebane
