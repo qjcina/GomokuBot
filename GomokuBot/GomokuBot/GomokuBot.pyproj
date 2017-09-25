@@ -59,7 +59,13 @@
     <Compile Include="Input\ColorGrabber.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Input\CommandListener.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Input\InputReader.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Input\MouseClicker.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Input\WindowGrabber.py">
