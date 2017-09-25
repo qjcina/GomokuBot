@@ -74,7 +74,7 @@ class BrightnessMapGenerator(object):
         width = len(oBitmap[0])
         iFollowingPoints = 0
         iMenuEnd, iMenuStart = self.detectMenuPosition(width, height, oBitmap)
-        iStartPosition = (iMenuStart / 2, -20 + (height / 2))
+        iStartPosition = (iMenuStart / 2, 20 + (height / 2))
         height, oMenuBitmap, width = self.separateMenu(height, oBitmap, iMenuEnd, iMenuStart)
         iHorizontalAverage = self.calculateHorizontalAverages(height, width, oMenuBitmap)
         iPlayerButtonsStart, iPlayerButtonsEnd = self.findPlayerButtons(height, iHorizontalAverage)
@@ -89,7 +89,23 @@ class BrightnessMapGenerator(object):
         strColor = getColor(ColorGrabber.getPixelColor(iXRightSeat, iYRightSeat, True, oCoordinates))
         if(strColor == "EmptySeat" or strColor == "NonEmptySeat"):
             iRightSeat = (iXRightSeat, iYRightSeat)
-        return Menu(iLeftSeat,iRightSeat,iStartPosition,True,oCoordinates)
+        for i in range(0,width):
+            (iXLeftPlayerColor, iYLeftPlayerColor) = (iMenuStart + i , iPlayerButtonsStart - 4)
+            strColor = getColor(ColorGrabber.getPixelColor(iXLeftPlayerColor, iYLeftPlayerColor, True, oCoordinates))
+            if("NonEmptySeat" == strColor or "Player1" == strColor):
+                iLeftPlayerColor = (iXLeftPlayerColor, iYLeftPlayerColor)
+                break
+            i+=4
+        print("Left color found!")
+        for i in range(0,width):
+            (iXRightPlayerColor, iYRightPlayerColor) = ((len(oMenuBitmap[0]) / 2) + iMenuStart + i, iPlayerButtonsStart -4)
+            strColor = getColor(ColorGrabber.getPixelColor(iXRightPlayerColor, iYRightPlayerColor, True, oCoordinates))
+            if("NonEmptySeat" == strColor or "Player1" == strColor):
+                iRightPlayerColor = (iXRightPlayerColor, iYRightPlayerColor)
+                break
+            i+=4
+        print("Right color found!")
+        return Menu(iLeftSeat,iRightSeat,iStartPosition,iLeftPlayerColor,iRightPlayerColor,True,oCoordinates)
 
 
 
