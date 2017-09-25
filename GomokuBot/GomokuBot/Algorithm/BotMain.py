@@ -15,5 +15,3 @@ class BotMain(object):
 
             if(self.isReadyToExit):
                 break
-
-
