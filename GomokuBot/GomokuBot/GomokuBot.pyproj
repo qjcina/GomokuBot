@@ -11,7 +11,7 @@
     <OutputPath>.</OutputPath>
     <Name>GomokuBot</Name>
     <RootNamespace>GomokuBot</RootNamespace>
-    <InterpreterId>Global|PythonCore|3.6</InterpreterId>
+    <InterpreterId>Global|PythonCore|3.6-32</InterpreterId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -37,6 +37,15 @@
     <Compile Include="Algorithm\MapGenerators\__init__.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Algorithm\MenuGenerators\BrightnessMapGenerator.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Algorithm\MenuGenerators\Menu.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Algorithm\MenuGenerators\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Algorithm\__init__.py">
       <SubType>Code</SubType>
     </Compile>
@@ -45,6 +54,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ImageProcessing\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Input\ColorGrabber.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Input\InputReader.py">
@@ -56,6 +68,12 @@
     <Compile Include="Input\__init__.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Resources\Colors.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Resources\Resources.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Resources\Settings.py">
       <SubType>Code</SubType>
     </Compile>
@@ -65,6 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Algorithm\MapGenerators\" />
+    <Folder Include="Algorithm\MenuGenerators\" />
     <Folder Include="LineDetection\" />
     <Folder Include="ImageProcessing\" />
     <Folder Include="Algorithm\" />
@@ -73,7 +92,7 @@
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
-    <InterpreterReference Include="Global|PythonCore|3.6" />
+    <InterpreterReference Include="Global|PythonCore|3.6-32" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

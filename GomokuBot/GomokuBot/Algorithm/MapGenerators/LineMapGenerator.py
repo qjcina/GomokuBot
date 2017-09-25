@@ -49,8 +49,9 @@ class LineMapGenerator(object):
         del iHorizontalAverage[iLastVerticalLine+10:]
         self.calculateAverage(width, iHorizontalAverage)
         oHorizontalLines = self.findLines(iHorizontalAverage)
-        #Adds missing middle line
-        oHorizontalLines.insert(7,sum(oHorizontalLines[6:8])/2)
+        if(len(oHorizontalLines)<len(oVerticalLines)):
+            #Adds missing middle line
+            oHorizontalLines.insert(7,sum(oHorizontalLines[6:8])/2)
         #Creates list of points.
         oPointsList = []
         for y in range(0,len(oVerticalLines)):
