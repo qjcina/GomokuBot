@@ -21,7 +21,7 @@ class MouseClicker(object):
             print("Mouse click at",iX,iY)
             return True
         else:
-            print("Tried to click at",x,y)
+            print("Tried to click at",iX,iX)
             return False
     def tryClick(self, iX, iY, iTimeToSleep=1):
         while(not self.click(iX, iY)):
