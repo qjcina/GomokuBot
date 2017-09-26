@@ -11,7 +11,7 @@
     <OutputPath>.</OutputPath>
     <Name>GomokuBot</Name>
     <RootNamespace>GomokuBot</RootNamespace>
-    <InterpreterId>Global|PythonCore|3.6</InterpreterId>
+    <InterpreterId>Global|PythonCore|3.6-32</InterpreterId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,6 +22,15 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Algorithm\BotLogics\Simple\ZeroDepth.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Algorithm\BotLogics\Simple\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Algorithm\BotLogics\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Algorithm\BotMain.py">
       <SubType>Code</SubType>
     </Compile>
@@ -35,6 +44,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Algorithm\MapGenerators\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Algorithm\MapUpdate.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Algorithm\MenuGenerators\BrightnessMapGenerator.py">
@@ -88,8 +100,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Algorithm\BotLogics\Simple\" />
     <Folder Include="Algorithm\MapGenerators\" />
     <Folder Include="Algorithm\MenuGenerators\" />
+    <Folder Include="Algorithm\BotLogics\" />
     <Folder Include="LineDetection\" />
     <Folder Include="ImageProcessing\" />
     <Folder Include="Algorithm\" />
@@ -98,7 +112,7 @@
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
-    <InterpreterReference Include="Global|PythonCore|3.6" />
+    <InterpreterReference Include="Global|PythonCore|3.6-32" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
