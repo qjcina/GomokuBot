@@ -17,6 +17,13 @@ class Map(object):
                 self.oMap[x][y] = MapElement(oAbsolutePoints[i][0],oAbsolutePoints[i][1])
                 #plot.plot(oAbsolutePoints[i][0],oAbsolutePoints[i][1], marker="o")
                 i+=1
-    def __len__(self):
-        return (self.oMap[0])*len(self.oMap)
+    def get2DArray(self):
+        oReturnArray = []
+        for y in self.oMap:
+            for x in y:
+                oReturnArray.append((x.iXPosition, x.iYPosition))
+        return oReturnArray
+
+    def getLength(self):
+        return (len(self.oMap[0]), len(self.oMap))
 
