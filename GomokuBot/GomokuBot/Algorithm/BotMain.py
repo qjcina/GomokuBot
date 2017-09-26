@@ -39,6 +39,7 @@ class BotMain(object):
             return False
         bStarted = False
         self.turn = 2
+        bFirstTurn = True
         botLogics = Settings["botLogics"]
         while(True):
             if(bStarted == False and Colors.NonEmptySeat.name == getColor(getPixelColor(oMenuPoints["startPosition"][0], oMenuPoints["startPosition"][1]))):
@@ -56,12 +57,14 @@ class BotMain(object):
                 print("Turn",self.turn,"Player",self.iPlayer,end='\r')
                 self.oRefreshMap = getMapColors(self.oMap.get2DArray())
                 bSomethingChanged = updateMap(self.oMap, self.oRefreshMap, self.iPlayer)
-                if(bSomethingChanged and self.turn != self.iPlayer):
+                if(bSomethingChanged == True and self.turn != self.iPlayer):
                     self.turn = self.switchTurn(self.turn)
-                if(self.turn == self.iPlayer):
+                    bFirstTurn = False
+                elif((bSomethingChanged == True or bFirstTurn == True) and self.turn == self.iPlayer):
                     (iXClick, iYClick) = randomPosition(self.oMap)
                     self.oMouseClicker.tryClick(iXClick, iYClick)
                     self.turn = self.switchTurn(self.iPlayer)
+                    bFirstTurn = False
             
               
 
