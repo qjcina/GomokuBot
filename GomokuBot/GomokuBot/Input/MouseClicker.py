@@ -18,6 +18,7 @@ class MouseClicker(object):
             win32api.SetCursorPos((iX,iY))
             win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN,iX,iY,0,0)
             win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP,iX,iY,0,0)
+            win32api.SetCursorPos((x,y))
             print("Mouse click at",iX,iY)
             return True
         else:
