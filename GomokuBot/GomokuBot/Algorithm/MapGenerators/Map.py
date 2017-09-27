@@ -14,7 +14,7 @@ class Map(object):
         i=0
         for y in range(0,len(self.oMap[0])):
             for x in range(0,len(self.oMap)):
-                self.oMap[x][y] = MapElement(oAbsolutePoints[i][0],oAbsolutePoints[i][1])
+                self.oMap[y][x] = MapElement(oAbsolutePoints[i][0],oAbsolutePoints[i][1])
                 #plot.plot(oAbsolutePoints[i][0],oAbsolutePoints[i][1], marker="o")
                 i+=1
     def get2DArray(self):
@@ -23,7 +23,12 @@ class Map(object):
             for x in y:
                 oReturnArray.append((x.iXPosition, x.iYPosition))
         return oReturnArray
-
+    def getMap(self):
+        oReturnMap = [[None for i in range(0,len(self.oMap[0]))] for i in range(0,len(self.oMap))]
+        for y in range(0,len(self.oMap)):
+            for x in range(0,len(self.oMap[0])):
+                oReturnMap[y][x] = (self.oMap[y][x].iXPosition, self.oMap[y][x].iYPosition, self.oMap[y][x].iPlayerToken)
+        return oReturnMap
     def getLength(self):
         return (len(self.oMap[0]), len(self.oMap))
 
