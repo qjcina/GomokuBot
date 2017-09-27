@@ -39,8 +39,10 @@ class BotMain(object):
             return False
         bStarted = False
         self.turn = 2
+        bSomethingChanged = False
         bFirstTurn = True
-        botLogics = Settings["botLogics"]
+        bSkipCheck = False
+        botLogics = Settings["botLogics"].value
         while(True):
             if(bStarted == False and Colors.NonEmptySeat.name == getColor(getPixelColor(oMenuPoints["startPosition"][0], oMenuPoints["startPosition"][1]))):
                 self.oMouseClicker.tryClick(oMenuPoints["startPosition"][0], oMenuPoints["startPosition"][1])
@@ -56,15 +58,26 @@ class BotMain(object):
             if(bStarted):
                 print("Turn",self.turn,"Player",self.iPlayer,end='\r')
                 self.oRefreshMap = getMapColors(self.oMap.get2DArray())
-                bSomethingChanged = updateMap(self.oMap, self.oRefreshMap, self.iPlayer)
+
+                if(bSkipCheck):
+                    updateMap(self.oMap, self.oRefreshMap, self.iPlayer)
+                    bSkipCheck = False
+                else:
+                    bSomethingChanged = updateMap(self.oMap, self.oRefreshMap, self.iPlayer)
+
                 if(bSomethingChanged == True and self.turn != self.iPlayer):
                     self.turn = self.switchTurn(self.turn)
                     bFirstTurn = False
-                elif((bSomethingChanged == True or bFirstTurn == True) and self.turn == self.iPlayer):
-                    (iXClick, iYClick) = randomPosition(self.oMap)
+                elif(self.turn == self.iPlayer):
+                    if(bFirstTurn):
+                        (iXClick, iYClick) = randomPosition(self.oMap)
+                    else:
+                        (iXClick, iYClick) = botLogics.getPoint(self.oMap, self.iPlayer)
                     self.oMouseClicker.tryClick(iXClick, iYClick)
                     self.turn = self.switchTurn(self.iPlayer)
                     bFirstTurn = False
+                    bSomethingChanged = False
+                    bSkipCheck = True
             
               
 
