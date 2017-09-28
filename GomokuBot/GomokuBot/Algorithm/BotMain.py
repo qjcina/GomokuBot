@@ -1,5 +1,7 @@
 import cv2
 import time
+from Resources.DebugMemory import printHeuristicMap
+from Resources.Resources import swapPlayer
 from Resources.Settings import Settings
 from Input.ColorGrabber import getPixelColor, getMapColors
 from Input.MouseClicker import getCommandListener, MouseClicker
@@ -12,11 +14,6 @@ class BotMain(object):
         self.isReadyToExit = False
         self.oCommandListener = getCommandListener()
         self.oMouseClicker = MouseClicker()
-    def switchTurn(self, iPlayer):
-        if(iPlayer == 1):
-            return 2
-        else:
-            return 1
     def process(self):
         oMapGenerator = Settings["mapGenerator"].value
         self.oMap = oMapGenerator.createMap(self.oBitmap, self.oCoordinates)
@@ -66,7 +63,7 @@ class BotMain(object):
                     bSomethingChanged = updateMap(self.oMap, self.oRefreshMap, self.iPlayer)
 
                 if(bSomethingChanged == True and self.turn != self.iPlayer):
-                    self.turn = self.switchTurn(self.turn)
+                    self.turn = swapPlayer(self.turn)
                     bFirstTurn = False
                 elif(self.turn == self.iPlayer):
                     if(bFirstTurn):
@@ -74,12 +71,11 @@ class BotMain(object):
                     else:
                         (iXClick, iYClick) = botLogics.getPoint(self.oMap, self.iPlayer)
                     self.oMouseClicker.tryClick(iXClick, iYClick)
-                    self.turn = self.switchTurn(self.iPlayer)
+                    self.turn = swapPlayer(self.iPlayer)
                     bFirstTurn = False
                     bSomethingChanged = False
                     bSkipCheck = True
-            
-              
+                    
 
             if(self.isReadyToExit):
                 break

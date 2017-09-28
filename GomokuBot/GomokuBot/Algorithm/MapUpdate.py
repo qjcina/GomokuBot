@@ -1,5 +1,6 @@
 from Resources.Colors import Colors, getColor
 from Input.ColorGrabber import treshold, getMapColors, getPixelColor
+from Resources.Resources import swapPlayer
 from random import randint
 from Algorithm.MapGenerators.Map import *
 def updateMap(oMap, tiColors, iPlayer):
@@ -9,16 +10,16 @@ def updateMap(oMap, tiColors, iPlayer):
         for y in oMap.oMap:
             for element in y:
                 oColor = getColor(treshold(tiColors[iColorIterator]))
-                if(oColor == Colors.Black.name):
+                if(oColor == Colors.NonEmptySeat.name):
                     if(element.iPlayerToken != 1):
                         element.iPlayerToken = 1
                         bChanged = True
-                elif(oColor == Colors.NonEmptySeat.name):
+                elif(oColor == Colors.Black.name):
                     if(element.iPlayerToken != 2):
                         element.iPlayerToken = 2
                         bChanged = True
                 elif(oColor == Colors.LastMove.name):
-                    element.iPlayerToken = iPlayer
+                    element.iPlayerToken = swapPlayer(iPlayer)
                     bChanged = True
                 else: 
                     element.iPlayerToken = 0
