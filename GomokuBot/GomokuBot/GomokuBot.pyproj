@@ -89,6 +89,9 @@
     <Compile Include="Resources\Colors.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Resources\DebugMemory.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Resources\Resources.py">
       <SubType>Code</SubType>
     </Compile>
