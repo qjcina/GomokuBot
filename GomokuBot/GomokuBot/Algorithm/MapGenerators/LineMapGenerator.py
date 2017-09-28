@@ -3,6 +3,7 @@ import matplotlib.lines as mlines
 from Algorithm.MapGenerators.Map import Map
 class LineMapGenerator(object):
     debug = False
+    iMinSpacing = None
     def __init__(self):
         pass
 
@@ -13,26 +14,30 @@ class LineMapGenerator(object):
         for y in range(0,height):
             for x in range(0,width):
                 if(oBitmap[y][x] == 255):
-                    iVerticalAverage[x]+=255
-                    iHorizontalAverage[y]+=255
+                    iVerticalAverage[y]+=255
+                    iHorizontalAverage[x]+=255
 
     def calculateAverage(self, iElementsNumber, oAverageList):
         for x in range(0,len(oAverageList)):
             oAverageList[x]/=iElementsNumber
-            if(oAverageList[x] < 128):
+            if(oAverageList[x] < 110):
                 oAverageList[x] = 0
             else:
                 oAverageList[x] = 255
 
     def findLines(self, iVerticalAverage):
         iFollowingZeros = 0
+        self.iMinSpacing=None
         oLines = []
         for x in range(0,len(iVerticalAverage)):
             if(iVerticalAverage[x] == 0):
                 iFollowingZeros+=1
             else:
                 if(iFollowingZeros > 0):
-                    oLines.append(x)
+                    if((self.iMinSpacing==None) or (x - oLines[-1] > self.iMinSpacing * 0.8)):
+                        oLines.append(x)
+                        if(self.iMinSpacing == None and len(oLines)  == 2):
+                            self.iMinSpacing = oLines[1] - oLines[0] 
                 iFollowingZeros = 0
         print("Found",len(oLines),"lines")
         return oLines
@@ -40,38 +45,37 @@ class LineMapGenerator(object):
     def createMap(self, oBitmap, oCoordinates):
         height = len(oBitmap)
         width = len(oBitmap[0])
-        iVerticalAverage = [0 for i in range(0, width)]
-        iHorizontalAverage = [0 for i in range(0, height)]
+        iVerticalAverage = [0 for i in range(0, height)]
+        iHorizontalAverage = [0 for i in range(0, width)]
         self.countPositivePixels(height, iHorizontalAverage, iVerticalAverage, oBitmap, width)
-        self.calculateAverage(height, iVerticalAverage)
+        self.calculateAverage(width, iVerticalAverage)
         oVerticalLines = self.findLines(iVerticalAverage)
         iLastVerticalLine = max(oVerticalLines)
-        del iHorizontalAverage[iLastVerticalLine+10:]
-        self.calculateAverage(width, iHorizontalAverage)
+        del iHorizontalAverage[iLastVerticalLine + 10:]
+        self.calculateAverage(height, iHorizontalAverage)
         oHorizontalLines = self.findLines(iHorizontalAverage)
-        if(len(oHorizontalLines)<len(oVerticalLines)):
+        if(len(oHorizontalLines)>len(oVerticalLines)):
             #Adds missing middle line
-            oHorizontalLines.insert(7,sum(oHorizontalLines[6:8])/2)
+            oVerticalLines.insert(7,sum(oVerticalLines[6:8])/2)
         #Creates list of points.
         oPointsList = []
         for y in range(0,len(oVerticalLines)):
             for x in range(0,len(oHorizontalLines)):
                 oPointsList.append([oHorizontalLines[x], oVerticalLines[y]])
         
-        if(self.debug == True):
+        if(True):
             self.__showDebug(oBitmap, oVerticalLines, oHorizontalLines, width, height, oPointsList)
         
         return Map(oPointsList,(len(oHorizontalLines),len(oVerticalLines)), oCoordinates, True)
-    #def getControls(self, oBitmap, oCoordinates):
 
     def __showDebug(self, oBitmap, oVerticalLines, oHorizontalLines, width, height, oPoints):
         plot.imshow(oBitmap, cmap='gray')
         for x in range(0,len(oVerticalLines)):
-            line = mlines.Line2D([oVerticalLines[x], oVerticalLines[x]],[0,height])
+            line = mlines.Line2D([0,width], [oVerticalLines[x], oVerticalLines[x]])
             plotGCA = plot.gca()
             plotGCA.add_line(line)
         for x in range(0,len(oHorizontalLines)):
-            line = mlines.Line2D([0,width],[oHorizontalLines[x], oHorizontalLines[x]])
+            line = mlines.Line2D([oHorizontalLines[x], oHorizontalLines[x]],[0,height])
             plotGCA = plot.gca()
             plotGCA.add_line(line)
         x_list = [x for [x, y] in oPoints]
