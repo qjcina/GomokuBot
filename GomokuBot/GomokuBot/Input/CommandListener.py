@@ -1,4 +1,5 @@
 import threading
+from Resources.DebugMemory import setForPrinting
 from Input.InputReader import InputReader
 class CommandListener(object):
     def __init__(self):
@@ -9,9 +10,13 @@ class CommandListener(object):
         oListenerThread.start()
     def listenerLoop(self):
         while(True):
-            self.oInput.waitForInput(32)
-            self.Flag = ~self.Flag
-            print("Mouse Flag is set to",self.Flag)
+            readkey = self.oInput.waitForAnyInput()
+            if(readkey==32):
+                self.Flag = ~self.Flag
+                print("Mouse Flag is set to",self.Flag)
+            if(readkey==107):
+                print("PRINTING HEURISTICS")
+                setForPrinting()
 __oCommandListener = None
 def getCommandListener():
     global __oCommandListener

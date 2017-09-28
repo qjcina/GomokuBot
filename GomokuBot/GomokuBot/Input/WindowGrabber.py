@@ -1,6 +1,7 @@
 import pyscreenshot as ImageGrab
 import matplotlib.pyplot as plot
 import matplotlib.image as img
+from Resources.DebugMemory import saveWindow
 import numpy as numpy
 from win32 import win32gui
 from multiprocessing import Process
@@ -13,6 +14,7 @@ class WindowGrabber(object):
     figure = None
     def __grabImage(self):
         self.image = ImageGrab.grab(bbox=self.coordinates)
+        saveWindow(self.coordinates)
     """
     checkValid method lets user decide if image is valid.
     Returns image and its coordinates.
