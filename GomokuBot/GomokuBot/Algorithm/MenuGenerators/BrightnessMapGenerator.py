@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plot
 from Input import ColorGrabber
+
 from Resources.Colors import Colors, getColor
 from Algorithm.MenuGenerators.Menu import Menu
 class BrightnessMapGenerator(object):

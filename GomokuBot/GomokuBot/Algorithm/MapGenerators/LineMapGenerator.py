@@ -63,7 +63,7 @@ class LineMapGenerator(object):
             for x in range(0,len(oHorizontalLines)):
                 oPointsList.append([oHorizontalLines[x], oVerticalLines[y]])
         
-        if(True):
+        if(False):
             self.__showDebug(oBitmap, oVerticalLines, oHorizontalLines, width, height, oPointsList)
         
         return Map(oPointsList,(len(oHorizontalLines),len(oVerticalLines)), oCoordinates, True)
