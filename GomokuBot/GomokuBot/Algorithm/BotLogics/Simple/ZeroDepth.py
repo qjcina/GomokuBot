@@ -82,8 +82,6 @@ class ZeroDepth(object):
                             power = iRange * 5
                         if(self.addToHeuristic(x + iDirection * iMultipler, y, power * iMultipler, oRawMap, self.iPlayer)):
                             break
-            for iDirection in range(-1,2):
-                if(iDirection != 0):
                     for iMultipler in range(1,iRange + 1):
                         if(iMultipler == 4):
                             power = 10000
@@ -91,8 +89,6 @@ class ZeroDepth(object):
                             power = iRange * 5
                         if(self.addToHeuristic(x, y + iDirection * iMultipler, power * iMultipler, oRawMap, self.iPlayer)):
                             break
-            for iDirection in range(-1,2):
-                if(iDirection != 0):
                     for iMultipler in range(1,iRange + 1):
                         if(iMultipler == 4):
                             power = 10000
@@ -100,8 +96,6 @@ class ZeroDepth(object):
                             power = iRange * 5
                         if(self. addToHeuristic(x + iDirection * iMultipler, y + iDirection * iMultipler, power * iMultipler, oRawMap, self.iPlayer)):
                             break
-            for iDirection in range(-1,2):
-                if(iDirection != 0):
                     for iMultipler in range(1,iRange + 1):
                         if(iMultipler == 4):
                             power = 10000
@@ -125,11 +119,6 @@ class ZeroDepth(object):
                                 power = self.setPower(x - iDirection, y, iNumberInRow, oRawMap)
                                 self.addToHeuristic(x + iDirection * iMultipler, y, power, oRawMap, iColor) 
                             break
-                        
-
-            
-            for iDirection in range(-1,2):
-                if(iDirection != 0):
                     iNumberInRow = 0
                     for iMultipler in range(1,iRange + 1):
                         iNumberInRow+=1
@@ -141,9 +130,6 @@ class ZeroDepth(object):
                                 power = self.setPower(x, y - iDirection, iNumberInRow, oRawMap)
                                 self.addToHeuristic(x, y + iDirection * iMultipler, power, oRawMap, iColor) 
                             break
-            
-            for iDirection in range(-1,2):
-                if(iDirection != 0):
                     iNumberInRow = 0
                     for iMultipler in range(1,iRange + 1):
                         iNumberInRow+=1
@@ -155,9 +141,6 @@ class ZeroDepth(object):
                                 power = self.setPower(x + iDirection * iMultipler, y - iDirection, iNumberInRow, oRawMap)
                                 self.addToHeuristic(x + iDirection * iMultipler, y + iDirection * iMultipler, power, oRawMap, iColor) 
                             break
-            
-            for iDirection in range(-1,2):
-                if(iDirection != 0):
                     iNumberInRow = 0
                     for iMultipler in range(1,iRange + 1):
                         iNumberInRow+=1
