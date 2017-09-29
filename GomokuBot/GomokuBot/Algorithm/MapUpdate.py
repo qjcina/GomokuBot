@@ -19,6 +19,7 @@ def updateMap(oMap, tiColors, iPlayer):
                         element.iPlayerToken = 2
                         bChanged = True
                 elif(oColor == Colors.LastMove.name):
+                    print("Enemy placed token",swapPlayer(iPlayer),"at",element.iXPosition,element.iYPosition)
                     element.iPlayerToken = swapPlayer(iPlayer)
                     bChanged = True
                 else: 
