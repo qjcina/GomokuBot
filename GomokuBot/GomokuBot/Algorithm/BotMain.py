@@ -20,20 +20,7 @@ class BotMain(object):
         oMenuGenerator = Settings["menuGenerator"].value
         oMenuPoints = oMenuGenerator.createMapPoints(self.oBitmap, self.oCoordinates)
         self.iSelectedSeat = self.selectSeat(oMenuPoints)
-        if(1 == self.iSelectedSeat):
-            oPlayerColor = getColor(getPixelColor(oMenuPoints["player1Color"][0], oMenuPoints["player1Color"][1]))
-            if(oPlayerColor == Colors.Player1.name):
-                self.iPlayer = 1 #black
-            else:
-                self.iPlayer = 2 #white
-        elif(2 == self.iSelectedSeat):
-            oPlayerColor = getColor(getPixelColor(oMenuPoints["player2Color"][0], oMenuPoints["player2Color"][1]))
-            if(oPlayerColor == Colors.NonEmptySeat.name):
-                self.iPlayer = 1 #black
-            else:
-                self.iPlayer = 2 #white
-        else:
-            return False
+        self.iPlayer = None
         bStarted = False
         self.turn = 2
         bSomethingChanged = False
@@ -52,6 +39,21 @@ class BotMain(object):
             elif(bStarted == False):
                 print("Game started!")  
                 bStarted = True
+                if(1 == self.iSelectedSeat):
+                    oPlayerColor = getColor(getPixelColor(oMenuPoints["player1Color"][0], oMenuPoints["player1Color"][1]))
+                    if(oPlayerColor == Colors.Player1.name):
+                        self.iPlayer = 2 #black
+                    else:
+                        self.iPlayer = 1 #white
+                elif(2 == self.iSelectedSeat):
+                    oPlayerColor = getColor(getPixelColor(oMenuPoints["player2Color"][0], oMenuPoints["player2Color"][1]))
+                    if(oPlayerColor == Colors.NonEmptySeat.name):
+                        self.iPlayer = 1 #black
+                    else:
+                        self.iPlayer = 2 #white
+                else:
+                    return False
+                print("SELECTED SIDE:", self.iPlayer)
             if(bStarted):
                 print("Turn",self.turn,"Player",self.iPlayer,end='\r')
                 self.oRefreshMap = getMapColors(self.oMap.get2DArray())
