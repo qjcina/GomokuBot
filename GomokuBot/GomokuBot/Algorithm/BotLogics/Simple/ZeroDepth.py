@@ -19,9 +19,9 @@ class ZeroDepth(object):
                         self.addAround(x,y, oRawMap)             #adds 1 around each token
                     if(element[2] == self.iPlayer):
                         self.addAround(x, y, oRawMap)            #adds 1 more around his tokens
-                    self.checkInRow(x,y,oRawMap,5)          #checks how many there are in row for opponent and himself
+                    self.checkInRow(x,y,oRawMap,5)              #checks how many there are in row for opponent and himself
                     if(element[2] != 0):
-                        self.oHeuristicMap[y][x] = -100000
+                        self.oHeuristicMap[y][x] = -1000000
                         continue
             for y in range(0, len(oRawMap)):
                 for x in range(0,len(oRawMap[0])):
@@ -76,8 +76,8 @@ class ZeroDepth(object):
             for iDirection in range(-1,2):
                 if(iDirection != 0):
                     for iMultipler in range(1,iRange + 1):
-                        if(iMultipler == 5):
-                            power = 1000
+                        if(iMultipler == 4):
+                            power = 10000
                         else:
                             power = iRange * 5
                         if(self.addToHeuristic(x + iDirection * iMultipler, y, power * iMultipler, oRawMap, self.iPlayer)):
@@ -85,8 +85,8 @@ class ZeroDepth(object):
             for iDirection in range(-1,2):
                 if(iDirection != 0):
                     for iMultipler in range(1,iRange + 1):
-                        if(iMultipler == 5):
-                            power = 1000
+                        if(iMultipler == 4):
+                            power = 10000
                         else:
                             power = iRange * 5
                         if(self.addToHeuristic(x, y + iDirection * iMultipler, power * iMultipler, oRawMap, self.iPlayer)):
@@ -94,8 +94,8 @@ class ZeroDepth(object):
             for iDirection in range(-1,2):
                 if(iDirection != 0):
                     for iMultipler in range(1,iRange + 1):
-                        if(iMultipler == 5):
-                            power = 1000
+                        if(iMultipler == 4):
+                            power = 10000
                         else:
                             power = iRange * 5
                         if(self. addToHeuristic(x + iDirection * iMultipler, y + iDirection * iMultipler, power * iMultipler, oRawMap, self.iPlayer)):
@@ -103,8 +103,8 @@ class ZeroDepth(object):
             for iDirection in range(-1,2):
                 if(iDirection != 0):
                     for iMultipler in range(1,iRange + 1):
-                        if(iMultipler == 5):
-                            power = 1000
+                        if(iMultipler == 4):
+                            power = 10000
                         else:
                             power = iRange * 5
                         if(self.addToHeuristic(x + iDirection * iMultipler, y + iDirection * (-iMultipler), power * iMultipler, oRawMap, self.iPlayer)):
