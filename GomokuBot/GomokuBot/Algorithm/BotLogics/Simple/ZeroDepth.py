@@ -2,6 +2,7 @@ from Algorithm.MapGenerators.Map import Map, MapElement
 from Resources.DebugMemory import saveHeuristicMap
 from random import randint
 class ZeroDepth(object):
+    bWinningCondition = False
     def __init__(self):
         pass
     def getPoint(self, oMap, iPlayer):
@@ -31,6 +32,8 @@ class ZeroDepth(object):
                     elif(self.oHeuristicMap[y][x] == oMultipleMaximumValues[0][0]):
                         oMultipleMaximumValues.append((self.oHeuristicMap[y][x],oRawMap[y][x][0],oRawMap[y][x][1]))
             oMaximumValue = oMultipleMaximumValues[randint(0,len(oMultipleMaximumValues) - 1)]
+            if(oMaximumValue>=15000):
+                self.bWinningCondition = True
             saveHeuristicMap(self.oHeuristicMap, oRawMap)
             return (oMaximumValue[1],oMaximumValue[2])
 
@@ -85,6 +88,7 @@ class ZeroDepth(object):
                     for iMultipler in range(1,iRange + 1):
                         if(iMultipler == 4):
                             power = 10000
+                            self.bWinningCondition = True
                         else:
                             power = iRange * 5
                         if(self.addToHeuristic(x, y + iDirection * iMultipler, power * iMultipler, oRawMap, self.iPlayer)):
@@ -92,6 +96,7 @@ class ZeroDepth(object):
                     for iMultipler in range(1,iRange + 1):
                         if(iMultipler == 4):
                             power = 10000
+                            self.bWinningCondition = True
                         else:
                             power = iRange * 5
                         if(self. addToHeuristic(x + iDirection * iMultipler, y + iDirection * iMultipler, power * iMultipler, oRawMap, self.iPlayer)):
@@ -99,6 +104,7 @@ class ZeroDepth(object):
                     for iMultipler in range(1,iRange + 1):
                         if(iMultipler == 4):
                             power = 10000
+                            self.bWinningCondition = True
                         else:
                             power = iRange * 5
                         if(self.addToHeuristic(x + iDirection * iMultipler, y + iDirection * (-iMultipler), power * iMultipler, oRawMap, self.iPlayer)):

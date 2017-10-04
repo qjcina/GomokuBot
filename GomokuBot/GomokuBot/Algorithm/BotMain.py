@@ -6,7 +6,7 @@ from Resources.Settings import Settings
 from Input.ColorGrabber import getPixelColor, getMapColors
 from Input.MouseClicker import getCommandListener, MouseClicker
 from Resources.Colors import getColor, Colors
-from Algorithm.MapUpdate import updateMap, randomPosition
+from Algorithm.MapUpdate import updateMap, randomPosition, checkGameStatus
 class BotMain(object):
     def __init__(self, oBitmap, oCoordinates):
         self.oBitmap = oBitmap
@@ -14,6 +14,8 @@ class BotMain(object):
         self.isReadyToExit = False
         self.oCommandListener = getCommandListener()
         self.oMouseClicker = MouseClicker()
+        self.iWon = 0
+        self.iLost = 0
     def process(self):
         oMapGenerator = Settings["mapGenerator"].value
         self.oMap = oMapGenerator.createMap(self.oBitmap, self.oCoordinates)
@@ -57,7 +59,13 @@ class BotMain(object):
             if(bStarted):
                 print("Turn",self.turn,"Player",self.iPlayer,end='\r')
                 self.oRefreshMap = getMapColors(self.oMap.get2DArray())
-
+                if(checkGameStatus(self.oMap, self.oRefreshMap)):
+                    bStarted = False
+                    if(botLogics.bWinningCondition):
+                        self.iWon+=1
+                    else:
+                        self.iLost+=1
+                    continue
                 if(bSkipCheck):
                     updateMap(self.oMap, self.oRefreshMap, self.iPlayer)
                     bSkipCheck = False

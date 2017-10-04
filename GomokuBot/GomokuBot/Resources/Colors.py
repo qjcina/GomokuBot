@@ -8,6 +8,7 @@ class Colors(Enum):
     Background = [240, 176, 96]
     LastMove = [255, 0, 0]
     Black = [0, 0, 0]
+    RedMenu = [238, 34, 17]
     NotFound = [-1, -1, -1]
 def getColor(iColor):
     iColor = list(iColor)

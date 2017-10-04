@@ -36,4 +36,13 @@ def randomPosition(oMap, bIsOccupied=False):
             break
         return (oRandomizedPoint.iXPosition, oRandomizedPoint.iYPosition)
 
-
+def checkGameStatus(oMap, tiColors):
+    iColorIterator = 0
+    if isinstance(oMap, Map):
+        for y in oMap.oMap:
+            for element in y:
+                oColor = getColor(tiColors[iColorIterator])
+                if(oColor == Colors.RedMenu.name):
+                    return True
+                iColorIterator+=1
+    return False
