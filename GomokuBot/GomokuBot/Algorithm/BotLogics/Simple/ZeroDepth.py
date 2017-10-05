@@ -5,14 +5,31 @@ class ZeroDepth(object):
     bWinningCondition = False
     def __init__(self):
         pass
+
+    def generateMaps(self, oMap):
+        oMaximumValue = (0,None, None)
+        oRawMap = oMap.getMap()
+        self.oHeuristicMap = [[0 for i in range(0,len(oRawMap))] for j in range(0,len(oRawMap[0]))]
+        return oRawMap
+
+    def findMaximum(self, oRawMap):
+        oMultipleMaximumValues = [(0,0,0)]
+        for y in range(0, len(oRawMap)):
+            for x in range(0,len(oRawMap[0])):
+                if(self.oHeuristicMap[y][x] > oMultipleMaximumValues[0][0]):
+                    oMultipleMaximumValues = []
+                    oMultipleMaximumValues.append((self.oHeuristicMap[y][x],oRawMap[y][x][0],oRawMap[y][x][1]))
+                elif(self.oHeuristicMap[y][x] == oMultipleMaximumValues[0][0]):
+                    oMultipleMaximumValues.append((self.oHeuristicMap[y][x],oRawMap[y][x][0],oRawMap[y][x][1]))
+        oMaximumValue = oMultipleMaximumValues[randint(0,len(oMultipleMaximumValues) - 1)]
+        return oMaximumValue
+
     def getPoint(self, oMap, iPlayer):
         self.iPlayer = iPlayer
-        oMultipleMaximumValues = [(0,0,0)]
+        
         print("\nZERODEPTH", end = '\r')
         if(isinstance(oMap, Map)):
-            oMaximumValue = (0,None, None)
-            oRawMap = oMap.getMap()
-            self.oHeuristicMap = [[0 for i in range(0,len(oRawMap))] for j in range(0,len(oRawMap[0]))]
+            oRawMap = self.generateMaps(oMap)
             for y in range(0, len(oRawMap)):
                 for x in range(0,len(oRawMap[0])):
                     element = oRawMap[y][x]
@@ -24,14 +41,7 @@ class ZeroDepth(object):
                     if(element[2] != 0):
                         self.oHeuristicMap[y][x] = -1000000
                         continue
-            for y in range(0, len(oRawMap)):
-                for x in range(0,len(oRawMap[0])):
-                    if(self.oHeuristicMap[y][x] > oMultipleMaximumValues[0][0]):
-                        oMultipleMaximumValues = []
-                        oMultipleMaximumValues.append((self.oHeuristicMap[y][x],oRawMap[y][x][0],oRawMap[y][x][1]))
-                    elif(self.oHeuristicMap[y][x] == oMultipleMaximumValues[0][0]):
-                        oMultipleMaximumValues.append((self.oHeuristicMap[y][x],oRawMap[y][x][0],oRawMap[y][x][1]))
-            oMaximumValue = oMultipleMaximumValues[randint(0,len(oMultipleMaximumValues) - 1)]
+            oMaximumValue = self.findMaximum(oRawMap)
             if(oMaximumValue>=15000):
                 self.bWinningCondition = True
             saveHeuristicMap(self.oHeuristicMap, oRawMap)
