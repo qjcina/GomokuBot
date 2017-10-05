@@ -3,6 +3,7 @@ from Resources.DebugMemory import saveHeuristicMap
 from random import randint
 class ZeroDepth(object):
     bWinningCondition = False
+    iMultiplier = 1
     def __init__(self):
         pass
 
@@ -24,25 +25,27 @@ class ZeroDepth(object):
         oMaximumValue = oMultipleMaximumValues[randint(0,len(oMultipleMaximumValues) - 1)]
         return oMaximumValue
 
+    def logicLoop(self, oRawMap):        
+        print("\nZERODEPTH", end = '\r')
+        for y in range(0, len(oRawMap)):
+            for x in range(0,len(oRawMap[0])):
+                element = oRawMap[y][x]
+                if(element[2] != 0):
+                    self.addAround(x,y, oRawMap)             #adds 1 around each token
+                if(element[2] == self.iPlayer):
+                    self.addAround(x, y, oRawMap)            #adds 1 more around his tokens
+                self.checkInRow(x,y,oRawMap,5)              #checks how many there are in row for opponent and himself
+                if(element[2] != 0):
+                    self.oHeuristicMap[y][x] = -1000000
+                    continue
+
     def getPoint(self, oMap, iPlayer):
         self.iPlayer = iPlayer
-        
-        print("\nZERODEPTH", end = '\r')
         if(isinstance(oMap, Map)):
             oRawMap = self.generateMaps(oMap)
-            for y in range(0, len(oRawMap)):
-                for x in range(0,len(oRawMap[0])):
-                    element = oRawMap[y][x]
-                    if(element[2] != 0):
-                        self.addAround(x,y, oRawMap)             #adds 1 around each token
-                    if(element[2] == self.iPlayer):
-                        self.addAround(x, y, oRawMap)            #adds 1 more around his tokens
-                    self.checkInRow(x,y,oRawMap,5)              #checks how many there are in row for opponent and himself
-                    if(element[2] != 0):
-                        self.oHeuristicMap[y][x] = -1000000
-                        continue
+            self.logicLoop(oRawMap)
             oMaximumValue = self.findMaximum(oRawMap)
-            if(oMaximumValue>=15000):
+            if(oMaximumValue[0]>=15000):
                 self.bWinningCondition = True
             saveHeuristicMap(self.oHeuristicMap, oRawMap)
             return (oMaximumValue[1],oMaximumValue[2])
@@ -50,7 +53,7 @@ class ZeroDepth(object):
     def addToHeuristic(self, x,y, iAmount, oRawMap=None, iPlayer=None):    
         if(x < len(self.oHeuristicMap[0]) and y < len(self.oHeuristicMap) and x >= 0 and y >= 0):
             if(oRawMap[y][x][2] == iPlayer or oRawMap[y][x][2] == 0 or iPlayer == None):
-                self.oHeuristicMap[y][x]+=iAmount    
+                self.oHeuristicMap[y][x]+=iAmount*self.iMultiplier    
             if(oRawMap[y][x][2] == 0):
                 return True
             elif(oRawMap[y][x][2] != iPlayer):
