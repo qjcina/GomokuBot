@@ -34,6 +34,3 @@ Calculates menu positions based on average brightness and colors. Algorithm:
 ## Bot Logics
 - **ZeroDepth**
 Calculates heuristic based on current setting of each player tokens. The higher numer of tokens in a row - the higher value. If bot can place on token and win game - heruristic value will be very high. Taken spots get negative value, so bot wont choose them. This algorithm calculates values for next move.
-# Other bots:
-- Petriczi (C#):
-https://github.com/petriczi/boty_jebane
